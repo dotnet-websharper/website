@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <StartAction>Program</StartAction>
+    <StartProgram>$([System.Environment]::GetEnvironmentVariable(`WinDir`))\explorer.exe</StartProgram>
+    <StartArguments>$(MSBuildThisFileDirectory)bin\html</StartArguments>
+    <OutputDirectory>../../build</OutputDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../Online/Site.fs" />
+    <None Include="extra.files" />
+    <None Include="wsconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <NeededForBuild Include="../Online/Main.html" />
+  </ItemGroup>
+
+  <Target Name="CopyFilesBeforeBuild" BeforeTargets="Build">
+    <Copy SourceFiles="@(NeededForBuild)" DestinationFolder="." />
+  </Target>
+
+  <!--<ItemGroup>
+    <ExtraFiles Include="../Online/wwwroot/files/**" linkBase="files" />
+    <ExtraFiles Include="../Online/wwwroot/css/**" linkBase="css" />
+    <ExtraFiles Include="../Online/wwwroot/js/**" linkBase="js" />
+    <ExtraFiles Include="../Online/wwwroot/img/**" linkBase="img" />
+    <ExtraFiles Include="../Online/wwwroot/assets/**" linkBase="assets" />
+    <ExtraFiles Include="../Online/wwwroot/legal/**" linkBase="legal" />
+    <ExtraFiles Include="../Online/wwwroot/images/**" linkBase="images" />
+  </ItemGroup>
+    
+  <Target Name="CopyFiles" AfterTargets="Build">
+    <Copy SourceFiles="@(ExtraFiles)" DestinationFolder="$(OutputDirectory)/%(linkBase)/%(RecursiveDir)" />
+  </Target>-->
+
+  <ItemGroup>
+    <PackageReference Include="WebSharper" Version="6.0.0.211" />    
+    <PackageReference Include="WebSharper.FSharp" Version="6.0.0.211" />
+    <PackageReference Include="WebSharper.UI" Version="6.0.0.208" />
+    <PackageReference Update="FSharp.Core" Version="6.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\Dynamic\Dynamic.fsproj" />
+	<ProjectReference Include="..\Templates\Templates.fsproj" />
+  </ItemGroup>
+
+</Project>

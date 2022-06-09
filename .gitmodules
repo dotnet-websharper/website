@@ -1,0 +1,6 @@
+[submodule "legal"]
+	path = legal
+	url = https://github.com/intellifactory/legal
+[submodule "website-template"]
+	path = website-template
+	url = https://github.com/dotnet-websharper/website-template
